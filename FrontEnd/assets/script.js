@@ -1,9 +1,19 @@
+const gallery = document.querySelector(".gallery");
+const portfolio = document.querySelector("#portfolio");
+const btns = document.createElement("div");
+btns.className = 'btns';
+const buttonAll = document.createElement("button");
+portfolio.appendChild(btns);
+btns.appendChild(buttonAll);
+buttonAll.innerHTML = "Tous";
+gallery.insertAdjacentElement("beforebegin" , btns);
+
 async function works(){
 
-    const r = await fetch('http://localhost:5678/api/works');
+    const r = await fetch("http://localhost:5678/api/works");
     const travaux = await r.json();
     console.log(travaux);
-    const gallery = document.querySelector(".gallery");
+
     travaux.forEach(element => {
         
         const figureBalise = document.createElement("figure");
@@ -17,8 +27,27 @@ async function works(){
         imgBalise.src = element.imageUrl;
         imgBalise.alt = element.title;
         figcaptionBalise.innerHTML = element.title;
-    });
+    }); 
 }
 
+async function categories(){
+
+    const r = await  fetch ("http://localhost:5678/api/categories");
+    const travaux = await r.json();
+    console.log(travaux);
+    const btns = document.querySelector(".btns");
+
+    travaux.forEach(element => {
+
+        const buttonBalise = document.createElement("button");
+
+        btns.appendChild(buttonBalise);
+            
+        buttonBalise.innerHTML = element.name;
+    })
+} 
+
+categories();
 works();
+
 

@@ -1,21 +1,19 @@
 const gallery = document.querySelector(".gallery");
 const portfolio = document.querySelector("#portfolio");
-const btns = document.createElement("div");
-btns.className = 'btns';
 const buttonAll = document.createElement("button");
-portfolio.appendChild(btns);
+const btns = document.createElement("div");
 btns.appendChild(buttonAll);
+portfolio.appendChild(btns);
+btns.className = 'btns';
 buttonAll.innerHTML = "Tous";
 gallery.insertAdjacentElement("beforebegin" , btns);
 
-async function works(){
-
+async function works() {
     const r = await fetch("http://localhost:5678/api/works");
-    const travaux = await r.json();
-    console.log(travaux);
-
-    travaux.forEach(element => {
-        
+    const listWorks = await r.json();
+    console.log(listWorks);
+    
+    listWorks.forEach(element => {
         const figureBalise = document.createElement("figure");
         const imgBalise = document.createElement("img");
         const figcaptionBalise = document.createElement("figcaption");
@@ -27,27 +25,32 @@ async function works(){
         imgBalise.src = element.imageUrl;
         imgBalise.alt = element.title;
         figcaptionBalise.innerHTML = element.title;
+        figureBalise.classList = element.category.name;
     }); 
 }
 
-async function categories(){
-
-    const r = await  fetch ("http://localhost:5678/api/categories");
-    const travaux = await r.json();
-    console.log(travaux);
+async function categories() {
+    const r = await fetch("http://localhost:5678/api/categories");
+    const listCategories = await r.json();
+    console.log(listCategories);
     const btns = document.querySelector(".btns");
-
-    travaux.forEach(element => {
-
+    let figureBalise = document.querySelector("#gallery figure");
+    listCategories.forEach(element => {
         const buttonBalise = document.createElement("button");
-
         btns.appendChild(buttonBalise);
-            
+        
         buttonBalise.innerHTML = element.name;
-    })
-} 
+        buttonBalise.className = element.name;
+        
 
-categories();
+
+        buttonBalise.addEventListener("click", function() {
+            listCategories.forEach(element => {
+                figureBalise.className == buttonBalise.className
+            });
+        });
+    });
+}
+
 works();
-
-
+categories();

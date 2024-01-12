@@ -52,7 +52,7 @@ async function categories() {
       const choixUtilisateur = this.id;
 
       figures.forEach((figure) => {
-        if (choixUtilisateur === figure.id || "") {
+        if (choixUtilisateur === figure.id) {
           figure.style.display = "block";
         } else if (choixUtilisateur === "") {
           figure.style.display = "block";

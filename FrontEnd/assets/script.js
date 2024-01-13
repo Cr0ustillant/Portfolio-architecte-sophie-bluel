@@ -6,8 +6,8 @@ btns.appendChild(buttonAll);
 portfolio.appendChild(btns);
 btns.className = "btns";
 buttonAll.innerHTML = "Tous";
+buttonAll.className = "btn-style";
 gallery.insertAdjacentElement("beforebegin", btns);
-
 async function works() {
   const v = await fetch("http://localhost:5678/api/works");
   const listWorks = await v.json();
@@ -42,6 +42,7 @@ async function categories() {
     btns.appendChild(buttonBalise);
     buttonBalise.innerHTML = element.name;
     buttonBalise.id = element.id;
+    buttonBalise.className = "btn-style";
   });
 
   buttonBalise = document.querySelectorAll(".btns button");
@@ -64,5 +65,8 @@ async function categories() {
     });
   });
 }
+
+
+
 works();
 categories();

@@ -8,6 +8,7 @@ btns.className = "btns";
 buttonAll.innerHTML = "Tous";
 buttonAll.className = "btn-style";
 gallery.insertAdjacentElement("beforebegin", btns);
+
 async function works() {
   const v = await fetch("http://localhost:5678/api/works");
   const listWorks = await v.json();
@@ -27,9 +28,10 @@ async function works() {
     figcaptionBalise.innerHTML = element.title;
     figureBalise.id = element.categoryId;
   });
+  listWorks => listWorks.name;
 }
 
-async function categories() {
+async function category() {
   const r = await fetch("http://localhost:5678/api/categories");
   const listCategories = await r.json();
 
@@ -50,23 +52,28 @@ async function categories() {
   buttonBalise.forEach((button) => {
     button.addEventListener("click", function comparaisonId() {
       let figures = document.querySelectorAll(".gallery figure");
-      const choixUtilisateur = this.id;
+      const userChoice = this.id;
 
       figures.forEach((figure) => {
-        if (choixUtilisateur === figure.id) {
-          figure.style.display = "block";
-        } else if (choixUtilisateur === "") {
+        if (userChoice === figure.id || userChoice === "") {
           figure.style.display = "block";
         } else {
           figure.style.display = "none";
         }
-        console.log(choixUtilisateur, "ok");
+        console.log(userChoice, "ok");
       });
     });
   });
 }
 
+// Test
 
+
+
+// Test
+window.onload = function() {
+  buttonAll.focus();
+}
 
 works();
-categories();
+category();

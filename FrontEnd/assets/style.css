@@ -93,14 +93,11 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-nav li:nth-child(4){
-	width: 22px;
+a {
+	text-decoration: none;
+	color: black;
 }
-nav li img {
-	width: 22px;
-}
-
-li:hover {
+li:hover , a:hover{
 	color: #B1663C;
 }
 #introduction {
@@ -148,7 +145,15 @@ li:hover {
 	border-radius: 60px ;
 	border: 1px solid  #1D6154 ;
 }
-.btn-style:focus {
+.btn-style-selected {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 16px;
+	text-align: center;
+	min-width: 100px;
+	height: 37px;
+	border-radius: 60px ;
+	border: 1px solid  #1D6154 ;
 	color: white;
 	background-color: #1D6154;
 }

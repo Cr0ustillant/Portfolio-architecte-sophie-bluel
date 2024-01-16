@@ -1,23 +1,27 @@
-const gallery = document.querySelector(".gallery");
 const portfolio = document.querySelector("#portfolio");
 const buttonAll = document.createElement("button");
 const btns = document.createElement("div");
 btns.appendChild(buttonAll);
 portfolio.appendChild(btns);
+const gallery = document.querySelector(".gallery");
 btns.className = "btns";
 buttonAll.innerHTML = "Tous";
-buttonAll.className = "btn-style";
+buttonAll.classList.add("btn-style");
 gallery.insertAdjacentElement("beforebegin", btns);
+
+                    // Liste des objets
 
 async function works() {
   const v = await fetch("http://localhost:5678/api/works");
   const listWorks = await v.json();
+
   console.log(listWorks);
 
   listWorks.forEach((element) => {
     const figureBalise = document.createElement("figure");
     const imgBalise = document.createElement("img");
     const figcaptionBalise = document.createElement("figcaption");
+
 
     gallery.appendChild(figureBalise);
     figureBalise.appendChild(imgBalise);
@@ -28,8 +32,12 @@ async function works() {
     figcaptionBalise.innerHTML = element.title;
     figureBalise.id = element.categoryId;
   });
+
   listWorks => listWorks.name;
+
 }
+
+                  // Liste des categories
 
 async function category() {
   const r = await fetch("http://localhost:5678/api/categories");
@@ -40,6 +48,7 @@ async function category() {
   const btns = document.querySelector(".btns");
 
   listCategories.forEach((element) => {
+
     const buttonBalise = document.createElement("button");
     btns.appendChild(buttonBalise);
     buttonBalise.innerHTML = element.name;
@@ -49,14 +58,26 @@ async function category() {
 
   buttonBalise = document.querySelectorAll(".btns button");
 
+                      // Fonction de filtrage 
+
   buttonBalise.forEach((button) => {
-    button.addEventListener("click", function comparaisonId() {
-      let figures = document.querySelectorAll(".gallery figure");
+    button.addEventListener("click", function() {
       const userChoice = this.id;
 
+      const buttonBalise = document.querySelectorAll(".btns button");
+
+      buttonBalise.forEach(button => {
+        button.classList.remove("btn-style-selected");
+      });
+
+      this.classList.add("btn-style-selected");
+
+      const figures = document.querySelectorAll(".gallery figure");
       figures.forEach((figure) => {
+
         if (userChoice === figure.id || userChoice === "") {
           figure.style.display = "block";
+
         } else {
           figure.style.display = "none";
         }
@@ -67,13 +88,12 @@ async function category() {
 }
 
 // Test
-
-
-
-// Test
 window.onload = function() {
-  buttonAll.focus();
+  buttonAll.classList.add("btn-style-selected");
+  buttonAll.style.outline = "none";
+
+  works();
+  category();
 }
 
-works();
-category();
+

@@ -160,6 +160,10 @@ input[type="submit"] {
     text-align: center;
 }
 
+.error {
+	background-color: rgba(255, 0, 0, 0.176);
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;

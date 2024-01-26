@@ -56,6 +56,7 @@ function verificationEmail(balise) {
       console.log(emailRegExp, "emailRegExp : ok")
       balise.classList.remove("error")
       pErrorEmail.innerHTML = ""
+      return true;
   } else {
       balise.classList.add("error")
       console.log("wrong email")
@@ -65,12 +66,15 @@ function verificationEmail(balise) {
   }
 }
 
+        // MOTS DE PASSE
+
 function verificationPassword(balise) {
-  let passwordRegExp = new RegExp("[a-zA-Z0-9][a-z]+")
+  let passwordRegExp = new RegExp("[A-Z][0-9][a-z]+")
   if (passwordRegExp.test(balise.value)) {
       console.log(passwordRegExp ,"passwordRegExp : ok")
       balise.classList.remove("error")
       pErrorPassword.innerHTML = ""
+      return true;
   } else {
       balise.classList.add("error")
       console.log("wrong password")
@@ -80,13 +84,13 @@ function verificationPassword(balise) {
   }
 }
 
- window.location.href = "index.html";
 
-
-form.addEventListener("change", (event) => {
+btnConnexion.addEventListener("click", (event) => {
   event.preventDefault();
-  verificationEmail(email);
-  verificationPassword(password);
+  if (verificationEmail(email) == true &&
+      verificationPassword(password) == true) {
+      window.location.href ="index.html"
+  }
 });
 
 login();

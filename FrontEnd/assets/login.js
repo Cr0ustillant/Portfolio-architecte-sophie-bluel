@@ -1,7 +1,7 @@
 const btnConnexion = document.getElementById("btn-connexion");
 
-const email = document.getElementById("email");
-const password = document.getElementById("password");
+const emailBalise = document.getElementById("email");
+const passwordBalise = document.getElementById("password");
 
 const form = document.querySelector("form");
 
@@ -14,83 +14,58 @@ const labelpassword = document.querySelector("label[for='password']");
 labelEmail.appendChild(pErrorEmail);
 labelpassword.appendChild(pErrorPassword);
 
-btnConnexion.addEventListener("click", () => {
-  let user = {
-    email: email.value,
-    password: password.value
-  };
-  console.log(user)
-})
-
 async function login() {
+  let user = {
+    email: emailBalise.value,
+    password: passwordBalise.value
+  }
   btnConnexion.addEventListener("click", async (event) => {
     event.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    console.log(email);
-    console.log(password);
     const r = await fetch("http://localhost:5678/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
-      body: JSON.stringify({ email, password }),
-    })
-
-    const passwordAndEmail = await r.json();
-    console.log(passwordAndEmail, "ok");
-
-    localStorage.setItem("token", "");
-    localStorage.getItem("token")
-    console.log(localStorage,"bon")
-  });
-}
-
-// Vérification du champ de saisie
-
-          // EMAIL
-          
-function verificationEmail(balise) {
-  let emailRegExp = new RegExp("[a-z]+\\.[a-z]+@[a-z]+\\.[a-z]+")
-  if (emailRegExp.test(balise.value)) {
-      console.log(emailRegExp, "emailRegExp : ok")
-      balise.classList.remove("error")
-      pErrorEmail.innerHTML = ""
-      return true;
-  } else {
-      balise.classList.add("error")
-      console.log("wrong email")
-
-      pErrorEmail.innerHTML = "Email incorrect!"
-      pErrorEmail.style.color = "red"
+      body: JSON.stringify(user)
+    });
+  })
+  if (r.ok) {
+    const userData = await response.json();
+    if (userData.token) {
+      localStorage.setItem("userId" , userData.userId);
+      localStorage.setItem("token" , userData.token);
+      window.location.href = "index.html";
+    } else {
+      console.log("erreur Id");
+    }
+  }   if (verificationEmail(email) && 
+      verificationPassword(password)) {
+      login();
   }
 }
-
-        // MOTS DE PASSE
-
-function verificationPassword(balise) {
-  let passwordRegExp = new RegExp("[A-Z][0-9][a-z]+")
-  if (passwordRegExp.test(balise.value)) {
-      console.log(passwordRegExp ,"passwordRegExp : ok")
-      balise.classList.remove("error")
-      pErrorPassword.innerHTML = ""
-      return true;
-  } else {
-      balise.classList.add("error")
-      console.log("wrong password")
-
-      pErrorPassword.innerHTML = "Wrong password!"
-      pErrorPassword.style.color = "red"
-  }
-}
-
 
 btnConnexion.addEventListener("click", (event) => {
-  event.preventDefault();
-  if (verificationEmail(email) == true &&
-      verificationPassword(password) == true) {
-      window.location.href ="index.html"
-  }
+  event.preventDefault();                
+
+
 });
 
-login();
+
+function verificationEmail(email){
+    let emailRegExp = new RegExp("[a-z]+\\.[a-z]+@[a-z]+\\.[a-z]+")
+    if (!emailRegExp.test(email.value)) {
+        emailBalise.classList.add("error")
+        console.log("Email incorrecte!")
+  
+        pErrorEmail.innerHTML = "Email incorrecte!"
+        pErrorEmail.style.color = "red"
+}}
+
+function verificationPassword(password){
+    if (password.value.length < 8) {
+        passwordBalise.classList.add("error")
+        console.log("mot de passe incorrect")
+        pErrorPassword.innerHTML = "mot de passe incorrecte!"
+        pErrorPassword.style.color = "red"
+    } else {console.log(passwordBalise.value ,"pass")}
+}

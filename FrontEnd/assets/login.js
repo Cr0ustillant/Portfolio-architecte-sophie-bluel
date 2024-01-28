@@ -41,6 +41,11 @@ async function login() {
 btnConnexion.addEventListener("click", async (event) => {
   event.preventDefault();
   
+  let user = {
+    email: emailBalise.value,
+    password: passwordBalise.value
+  }
+
   if (verificationPassword(password) && 
       verificationEmail(email)) {
       login();
@@ -48,17 +53,17 @@ btnConnexion.addEventListener("click", async (event) => {
   
   async  function verificationEmail(email){
       let emailRegExp = new RegExp("[a-z]+\\.[a-z]+@[a-z]+\\.[a-z]+")
-      if (!emailRegExp.test(email.value)) {
+      if (!emailRegExp.test(email.value) || email.value !== user[email.value]) {
           emailBalise.classList.add("error")
           console.log("Email incorrecte!")
     
           pErrorEmail.innerHTML = "Email incorrecte!"
           pErrorEmail.style.color = "red"
-  }}
+  }
+}
 
   async  function verificationPassword(password){
-      if (password.value == "" ||
-          password.value.length >= 7 || password.value.length <= 5) {
+      if (password.value == "" || password.value !== user[password.value]) {
           passwordBalise.classList.add("error")
           console.log("mot de passe incorrect")
           pErrorPassword.innerHTML = "mot de passe incorrecte!"
@@ -66,9 +71,10 @@ btnConnexion.addEventListener("click", async (event) => {
       } else {
         pErrorPassword.classList.remove("error")
         pErrorPassword.innerHTML = ""
-        console.log(passwordBalise.value ,"pass")
       }
-  }                
+  }   
+  
+  
 });
 
 

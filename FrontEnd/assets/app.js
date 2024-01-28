@@ -3,7 +3,7 @@ const modal = document.querySelector("aside")
 const openModal = function (event) {
     event.preventDefault()
     modal.style.visibility = "visible"
-    modal.addEventListener("click", closeModal)
+    // modal.addEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
 };
 

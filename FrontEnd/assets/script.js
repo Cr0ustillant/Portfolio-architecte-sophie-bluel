@@ -12,7 +12,7 @@ const modalWrapper = document.querySelector(".modal-wrapper")
                     // Liste des objets
 
 async function works() {
-  const v = await fetch("http://localhost:5678/api/works");
+  const v = await fetch("http://localhost:5678/api/works",);
   const listWorks = await v.json();
 
 
@@ -51,9 +51,7 @@ async function works() {
     figureBaliseModal.appendChild(trashIcone)
     figureBaliseModal.style.position = "relative"
   });
-
   listWorks => listWorks.name;
-
 }
 
                   // Liste des categories
@@ -119,11 +117,17 @@ window.onload = function() {
 
 function logged() {
   const token = localStorage.getItem("token");
-  const elementJsModal = document.querySelectorAll(".js-modal")
+  const elementJsModal = document.querySelector(".js-modal")
+  const liLogin = document.getElementById("login")
 console.log(token)
-  if (1==1) {
-    elementJsModal.style.visibility = "hidden"
-  } else {
+  if (token) {
     elementJsModal.style.visibility = "visible"
+    liLogin.innerHTML = "logout"
+    liLogin.onclick = function() {
+      localStorage.setItem("token","")
+      window.location.href = "index.html"
+    }
+  } else {
+    elementJsModal.style.visibility = "hidden"
   }
 }

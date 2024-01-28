@@ -79,11 +79,24 @@ header {
 	width: 630px;
 	max-width:  630px;
 	max-height:  680px;
-	padding: 20px;
+	padding: 60px 20px 45px 20px;
 	border-radius: 10px;
 	background-color: #fff;
 	text-align: center;
 	align-items: center;
+}
+.fig-container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 80%;
+	gap: 10px;
+}
+aside figure {
+	width: 18%;
+	margin-top: 10px;
+}
+aside img {
+	width: 100%;
 }
 .modal-wrapper h3 {
 	font-size: 26px;
@@ -91,9 +104,17 @@ header {
 }
 .fa-xmark {
 	position: absolute;
+	top: 26px;
+	right: 30px;
+}
+.fa-trash-can {
+	position: absolute;
+	background-color: black;
+	color: white;
+	padding: 5px;
+	border-radius: 2px;
 	top: 5px;
 	right: 5px;
-	padding: 10px;
 }
 hr{
 	width: 80%;

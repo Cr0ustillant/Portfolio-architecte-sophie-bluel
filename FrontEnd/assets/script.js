@@ -8,7 +8,7 @@ btns.className = "btns";
 buttonAll.innerHTML = "Tous";
 buttonAll.classList.add("btn-style");
 gallery.insertAdjacentElement("beforebegin", btns);
-
+const modalWrapper = document.querySelector(".modal-wrapper")
                     // Liste des objets
 
 async function works() {
@@ -22,9 +22,9 @@ async function works() {
     const figureBalise = document.createElement("figure");
     const imgBalise = document.createElement("img");
     const figcaptionBalise = document.createElement("figcaption");
-
-
+  
     gallery.appendChild(figureBalise);
+
     figureBalise.appendChild(imgBalise);
     figureBalise.appendChild(figcaptionBalise);
 
@@ -32,6 +32,24 @@ async function works() {
     imgBalise.alt = element.title;
     figcaptionBalise.innerHTML = element.title;
     figureBalise.className = element.categoryId;
+
+    const figureBaliseModal = document.createElement("figure");
+    const imgBaliseModal = document.createElement("img"); 
+    const figContainerModal = document.querySelector(".fig-container")
+
+    figContainerModal.appendChild(figureBaliseModal);
+
+    figureBaliseModal.appendChild(imgBaliseModal);
+
+    imgBaliseModal.src = element.imageUrl;
+    imgBaliseModal.alt = element.title;
+    figureBaliseModal.className = element.categoryId;
+
+    const trashIcone = document.createElement("i")
+    trashIcone.className = "fa-solid"
+    trashIcone.classList.add("fa-trash-can")
+    figureBaliseModal.appendChild(trashIcone)
+    figureBaliseModal.style.position = "relative"
   });
 
   listWorks => listWorks.name;

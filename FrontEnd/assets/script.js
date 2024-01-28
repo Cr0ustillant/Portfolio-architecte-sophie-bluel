@@ -15,6 +15,7 @@ async function works() {
   const v = await fetch("http://localhost:5678/api/works");
   const listWorks = await v.json();
 
+
   console.log(listWorks);
 
   listWorks.forEach((element) => {
@@ -30,7 +31,7 @@ async function works() {
     imgBalise.src = element.imageUrl;
     imgBalise.alt = element.title;
     figcaptionBalise.innerHTML = element.title;
-    figureBalise.id = element.categoryId;
+    figureBalise.className = element.categoryId;
   });
 
   listWorks => listWorks.name;
@@ -75,7 +76,7 @@ async function category() {
       const figures = document.querySelectorAll(".gallery figure");
       figures.forEach((figure) => {
 
-        if (userChoice === figure.id || userChoice === "") {
+        if (userChoice === figure.className || userChoice === "") {
           figure.style.display = "block";
 
         } else {
@@ -87,13 +88,24 @@ async function category() {
   });
 }
 
-// Test
 window.onload = function() {
   buttonAll.classList.add("btn-style-selected");
   buttonAll.style.outline = "none";
 
   works();
-  category();
+  category();logged()
 }
 
 
+
+
+function logged() {
+  const token = localStorage.getItem("token");
+  const elementJsModal = document.querySelectorAll(".js-modal")
+console.log(token)
+  if (1==1) {
+    elementJsModal.style.visibility = "hidden"
+  } else {
+    elementJsModal.style.visibility = "visible"
+  }
+}

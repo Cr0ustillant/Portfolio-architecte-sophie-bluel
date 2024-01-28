@@ -19,8 +19,6 @@ async function login() {
     email: emailBalise.value,
     password: passwordBalise.value
   }
-  btnConnexion.addEventListener("click", async (event) => {
-    event.preventDefault();
     const r = await fetch("http://localhost:5678/api/users/login", {
       method: "POST",
       headers: {
@@ -28,9 +26,8 @@ async function login() {
       },
       body: JSON.stringify(user)
     });
-  })
   if (r.ok) {
-    const userData = await response.json();
+    const userData = await r.json();
     if (userData.token) {
       localStorage.setItem("userId" , userData.userId);
       localStorage.setItem("token" , userData.token);
@@ -38,34 +35,40 @@ async function login() {
     } else {
       console.log("erreur Id");
     }
-  }   if (verificationEmail(email) && 
-      verificationPassword(password)) {
-      login();
-  }
+  }   
 }
 
-btnConnexion.addEventListener("click", (event) => {
-  event.preventDefault();                
+btnConnexion.addEventListener("click", async (event) => {
+  event.preventDefault();
+  
+  if (verificationPassword(password) && 
+      verificationEmail(email)) {
+      login();
+    }
+  
+  async  function verificationEmail(email){
+      let emailRegExp = new RegExp("[a-z]+\\.[a-z]+@[a-z]+\\.[a-z]+")
+      if (!emailRegExp.test(email.value)) {
+          emailBalise.classList.add("error")
+          console.log("Email incorrecte!")
+    
+          pErrorEmail.innerHTML = "Email incorrecte!"
+          pErrorEmail.style.color = "red"
+  }}
 
-
+  async  function verificationPassword(password){
+      if (password.value == "" ||
+          password.value.length >= 7 || password.value.length <= 5) {
+          passwordBalise.classList.add("error")
+          console.log("mot de passe incorrect")
+          pErrorPassword.innerHTML = "mot de passe incorrecte!"
+          pErrorPassword.style.color = "red"
+      } else {
+        pErrorPassword.classList.remove("error")
+        pErrorPassword.innerHTML = ""
+        console.log(passwordBalise.value ,"pass")
+      }
+  }                
 });
 
 
-function verificationEmail(email){
-    let emailRegExp = new RegExp("[a-z]+\\.[a-z]+@[a-z]+\\.[a-z]+")
-    if (!emailRegExp.test(email.value)) {
-        emailBalise.classList.add("error")
-        console.log("Email incorrecte!")
-  
-        pErrorEmail.innerHTML = "Email incorrecte!"
-        pErrorEmail.style.color = "red"
-}}
-
-function verificationPassword(password){
-    if (password.value.length < 8) {
-        passwordBalise.classList.add("error")
-        console.log("mot de passe incorrect")
-        pErrorPassword.innerHTML = "mot de passe incorrecte!"
-        pErrorPassword.style.color = "red"
-    } else {console.log(passwordBalise.value ,"pass")}
-}

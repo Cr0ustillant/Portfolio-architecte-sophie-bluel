@@ -47,11 +47,24 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
+.main-container {
 	max-width: 1140px;
 	margin:auto;
+}
+body {
+	margin: 0;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+}
+.edit-mode{
+	width: 100%;
+	height: 60px;
+	display: flex;
+	background-color: black;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	display: none;
 }
 header {
 	display: flex;
@@ -84,6 +97,7 @@ header {
 	background-color: #fff;
 	text-align: center;
 	align-items: center;
+	z-index: 1;
 }
 .fig-container {
 	display: flex;
@@ -186,7 +200,13 @@ li:hover , a:hover{
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+}
+.btn-open-modal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin: 0em 0em 4em 9em;
 }
 .btns {
 	display: flex;

@@ -50,6 +50,9 @@ async function works() {
     trashIcone.classList.add("fa-trash-can")
     figureBaliseModal.appendChild(trashIcone)
     figureBaliseModal.style.position = "relative"
+    // trashIcone.addEventListener("click", function() {
+    //   localStorage.removeItem(this.element)
+    // })
   });
   listWorks => listWorks.name;
 }
@@ -65,7 +68,6 @@ async function category() {
   const btns = document.querySelector(".btns");
 
   listCategories.forEach((element) => {
-
     const buttonBalise = document.createElement("button");
     btns.appendChild(buttonBalise);
     buttonBalise.innerHTML = element.name;
@@ -109,25 +111,24 @@ window.onload = function() {
   buttonAll.style.outline = "none";
 
   works();
-  category();logged()
+  category();
+  logged()
 }
-
-
-
 
 function logged() {
   const token = localStorage.getItem("token");
-  const elementJsModal = document.querySelector(".js-modal")
   const liLogin = document.getElementById("login")
-console.log(token)
-  if (token) {
-    elementJsModal.style.visibility = "visible"
+  console.log(token)  
+  if (token != "") {
+    document.querySelector(".btn-js-modal").style.visibility = "visible"
+    document.querySelector(".btns").style.visibility = "hidden"
+    document.querySelector(".edit-mode").style.display = "flex"
     liLogin.innerHTML = "logout"
     liLogin.onclick = function() {
       localStorage.setItem("token","")
       window.location.href = "index.html"
     }
   } else {
-    elementJsModal.style.visibility = "hidden"
+    document.querySelector(".btn-js-modal").style.visibility = "hidden"
   }
 }

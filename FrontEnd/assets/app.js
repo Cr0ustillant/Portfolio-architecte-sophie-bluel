@@ -13,10 +13,8 @@ const closeModal = function (event) {
     modal.removeEventListener("click", closeModal)
 };
 
-const elementJsModal = document.querySelectorAll(".js-modal")
+const elementJsModal = document.querySelectorAll(".btn-js-modal")
 
 elementJsModal.forEach(element => {
     element.addEventListener("click",openModal)
 });
-
-

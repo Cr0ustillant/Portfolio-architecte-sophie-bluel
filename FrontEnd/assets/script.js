@@ -12,7 +12,7 @@ const modalWrapper = document.querySelector(".modal-wrapper")
                     // Liste des objets
 
 async function works() {
-  const v = await fetch("http://localhost:5678/api/works",);
+  const v = await fetch("http://localhost:5678/api/works");
   const listWorks = await v.json();
 
 
@@ -32,6 +32,8 @@ async function works() {
     imgBalise.alt = element.title;
     figcaptionBalise.innerHTML = element.title;
     figureBalise.className = element.categoryId;
+    figureBalise.id = "figure"+element.id;
+
 
     const figureBaliseModal = document.createElement("figure");
     const imgBaliseModal = document.createElement("img"); 
@@ -44,15 +46,19 @@ async function works() {
     imgBaliseModal.src = element.imageUrl;
     imgBaliseModal.alt = element.title;
     figureBaliseModal.className = element.categoryId;
+    figureBaliseModal.id = "vignette"+element.id;
 
     const trashIcone = document.createElement("i")
-    trashIcone.className = "fa-solid"
-    trashIcone.classList.add("fa-trash-can")
+    trashIcone.setAttribute("class","fa-solid fa-trash-can")
     figureBaliseModal.appendChild(trashIcone)
     figureBaliseModal.style.position = "relative"
-    // trashIcone.addEventListener("click", function() {
-    //   localStorage.removeItem(this.element)
-    // })
+    trashIcone.classList.add(element.id)
+    trashIcone.id = element.id;
+
+    trashIcone.onclick = function(event) {
+      removeProject(element.id)
+      // console.log("supression", element.id)
+    }
   });
   listWorks => listWorks.name;
 }
@@ -96,7 +102,6 @@ async function category() {
 
         if (userChoice === figure.className || userChoice === "") {
           figure.style.display = "block";
-
         } else {
           figure.style.display = "none";
         }
@@ -118,15 +123,16 @@ window.onload = function() {
 function logged() {
   const token = localStorage.getItem("token");
   const liLogin = document.getElementById("login")
-  console.log(token)  
-  if (token != "") {
+  console.log(token)
+
+  if (token !== null) {
     document.querySelector(".btn-js-modal").style.visibility = "visible"
     document.querySelector(".btns").style.visibility = "hidden"
     document.querySelector(".edit-mode").style.display = "flex"
     liLogin.innerHTML = "logout"
     liLogin.onclick = function() {
-      localStorage.setItem("token","")
-      window.location.href = "index.html"
+      localStorage.removeItem("token","")
+      liLogin.href = "index.html"
     }
   } else {
     document.querySelector(".btn-js-modal").style.visibility = "hidden"

@@ -73,8 +73,6 @@ btnConnexion.addEventListener("click", async (event) => {
         pErrorPassword.innerHTML = ""
       }
   }   
-  
-  
 });
 
 

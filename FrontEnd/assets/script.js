@@ -9,14 +9,12 @@ buttonAll.innerHTML = "Tous";
 buttonAll.classList.add("btn-style");
 gallery.insertAdjacentElement("beforebegin", btns);
 const modalWrapper = document.querySelector(".modal-wrapper")
+const btnSelect = document.querySelector("#categorie")
                     // Liste des objets
 
 async function works() {
   const v = await fetch("http://localhost:5678/api/works");
   const listWorks = await v.json();
-
-
-  console.log(listWorks);
 
   listWorks.forEach((element) => {
     const figureBalise = document.createElement("figure");
@@ -79,6 +77,11 @@ async function categories() {
     buttonBalise.innerHTML = element.name;
     buttonBalise.id = element.id;
     buttonBalise.className = "btn-style";
+
+    const categorieOption = document.createElement("option")
+    btnSelect.appendChild(categorieOption)
+    categorieOption.innerHTML = element.name
+
   });
 
   buttonBalise = document.querySelectorAll(".btns button");

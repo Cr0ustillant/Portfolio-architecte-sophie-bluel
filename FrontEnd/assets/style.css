@@ -173,7 +173,10 @@ aside img {
 .add-img i {
 	font-size: 76px;
 }
-.add-img button  {
+#btn-add-img  {
+	visibility: hidden;
+}
+#label-add-img {
 	width: 173px;
 	font-size: 14px;
 	font-weight: 500;
@@ -188,7 +191,7 @@ aside img {
 	font-weight: 400;
 	color: #444;
 }
-.modal-add-project input , .modal-add-project select {
+.modal-add-project form input , .modal-add-project select {
 	border: none;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
 	width: 420px;

@@ -65,7 +65,7 @@ async function works() {
 
                   // Liste des categories
 
-async function category() {
+async function categories() {
   const r = await fetch("http://localhost:5678/api/categories");
   const listCategories = await r.json();
 
@@ -116,7 +116,7 @@ window.onload = function() {
   buttonAll.style.outline = "none";
 
   works();
-  category();
+  categories();
   logged()
 }
 

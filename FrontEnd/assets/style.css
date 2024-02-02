@@ -142,7 +142,7 @@ aside img {
 	flex-direction: column;
 	position: relative;
 	overflow: auto;
-	gap: 50px;
+	gap: 30px;
 	width: 630px;
 	max-width:  630px;
 	max-height:  680px;
@@ -168,12 +168,12 @@ aside img {
 	color: #CBD6DC;
 	width: 380px;
 	padding: 20px;
-	gap: 20px;
+	gap: 10px;
 }
 .add-img i {
 	font-size: 76px;
 }
-.add-img button {
+.add-img button  {
 	width: 173px;
 	font-size: 14px;
 	font-weight: 500;
@@ -202,6 +202,12 @@ form {
 }
 form hr {
 	width: 100%;
+}
+.modal-wrapper button , .modal-add-project form button {
+	align-self: center;
+	min-width: 237px;
+	font-size: 14px;
+	font-weight: 700;
 }
 section {
 	margin: 50px 0

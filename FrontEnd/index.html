@@ -24,8 +24,8 @@
 		</a>
 		<nav>
 			<ul>
-				<li>projets</li>
-				<li>contact</li>
+				<li><a href="#">projets</a></li>
+				<li><a href="#">contact</a></li>
 				<li><a href="login.html" id="login">login</a></li>
 				<li><img src="assets/icons/instagram.png" alt="Instagram" ></li>
 			</ul>
@@ -41,13 +41,17 @@
 		</div>
 		<div class="modal-add-project">
 			<i class="fa-solid fa-arrow-left"></i>
-			<i class="fa-solid fa-xmark js-modal-closes"></i>
+			<i class="fa-solid fa-xmark js-modal-close"></i>
 			<h3>Ajout photo</h3>
 			<div class="add-img">
-				<i class="fa-regular fa-image"></i>
-				<label for="btn-add-img" id="label-add-img">+ Ajouter photo</label>
-				<input type="file" id="btn-add-img">
-				<p>jpg.png : 4mo max</p>
+				<div class="img-container">
+					<i class="fa-regular fa-image"></i>
+					<label for="btn-add-img" id="label-add-img">+ Ajouter photo</label>
+					<input type="file" id="btn-add-img">
+					<p>jpg.png : 4mo max</p>
+				</div>
+				<div class="container-preview-img">
+				</div>
 			</div>
 			<form action="">
 				<label for="title">Titre</label>

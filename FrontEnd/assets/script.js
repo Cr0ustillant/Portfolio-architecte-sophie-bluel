@@ -10,6 +10,7 @@ buttonAll.classList.add("btn-style");
 gallery.insertAdjacentElement("beforebegin", btns);
 const modalWrapper = document.querySelector(".modal-wrapper")
 const btnSelect = document.querySelector("#categorie")
+
                     // Liste des objets
 
 async function works() {
@@ -81,6 +82,7 @@ async function categories() {
     const categorieOption = document.createElement("option")
     btnSelect.appendChild(categorieOption)
     categorieOption.innerHTML = element.name
+    categorieOption.value = element.id
 
   });
 
@@ -130,9 +132,10 @@ function logged() {
 
   if (token !== null) {
     document.querySelector(".btn-js-modal").style.visibility = "visible"
-    document.querySelector(".btns").style.visibility = "hidden"
+    document.querySelector(".btns").style.display = "none"
     document.querySelector(".edit-mode").style.display = "flex"
     liLogin.innerHTML = "logout"
+    liLogin.style.fontWeight = "bold"
     liLogin.onclick = function() {
       localStorage.removeItem("token","")
       liLogin.href = "index.html"

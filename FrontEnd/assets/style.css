@@ -74,10 +74,13 @@ header {
 	justify-content: space-between;
 	margin: 50px 0
 }
+header ul li a:nth-child(-1n+2):hover {
+	font-weight: bold;
+	color: black
+}
 .modal {
 	position: fixed;
-	visibility: hidden;
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	top: 0;
@@ -100,7 +103,6 @@ header {
 	background-color: #fff;
 	text-align: center;
 	align-items: center;
-	z-index: 1;
 }
 .fig-container {
 	display: flex;
@@ -163,18 +165,28 @@ aside img {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 5px;
 	background-color: #E8F1F6;
 	font-family: "Work Sans";
 	color: #CBD6DC;
 	width: 380px;
-	padding: 20px;
-	gap: 10px;
+}
+.img-container {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	margin: 20px 0;
 }
 .add-img i {
 	font-size: 76px;
 }
 #btn-add-img  {
 	visibility: hidden;
+	height: 0px;
+	width: 0px;
+}
+.img-preview {
+	max-height: 169px;
 }
 #label-add-img {
 	width: 173px;
@@ -276,6 +288,11 @@ li:hover , a:hover{
 #introduction p {
 	margin-bottom: 0.5em;
 }
+#portfolio {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 #portfolio h2 {
 	text-align: center;
 }
@@ -319,7 +336,7 @@ li:hover , a:hover{
 	background-color: #1D6154;
 }
 .gallery {
-	width: 100%;
+	width: 90%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
@@ -328,7 +345,7 @@ li:hover , a:hover{
 
 .gallery img {
 	width: 100%;
-
+	height: 407px; 
 }
 #contact {
 	width: 50%;

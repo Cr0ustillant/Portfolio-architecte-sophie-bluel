@@ -29,6 +29,10 @@ const elementJsModal = document.querySelector(".btn-js-modal");
 elementJsModal.addEventListener("click", openModal);
 
 function resetModal() {
+  const errorMessage = document.querySelector(".error-msg")
+  if (errorMessage.style.display = "block") {
+      errorMessage.style.display = "none";
+  }
   let imgPreview = document.querySelector(".img-preview"); 
   if (imgPreview !== null) {
     document.querySelector(".img-preview").remove(imgPreview);
@@ -102,25 +106,31 @@ btnSubmitWork.onclick = function (event) {
 
   const projectTitle = document.querySelector("#title")
   const imgPreview = document.querySelector(".img-preview") 
+  const errorMessage = document.querySelector(".error-msg")
 
   if (imgPreview == null) {
-    alert("Aucun fichier")
+    errorMessage.style.display = "block";
+    errorMessage.innerHTML = "Aucun fichier";
   } else {
     const file = btnAddFile.files[0];
     const fileSize = file.size; // Taille du fichier en octets
     const maxSize = 4 * 1024 * 1024; // Taille maximale autorisée en octets (4 Mo)
-  
+    const fileName = file.name.toLowerCase();  // Format du fichier
+    
   // Vérifier la taille du fichier
-        if (fileSize >= maxSize) {
-          alert('La taille du fichier dépasse les 4mo.');
+        if (!(fileName.endsWith(".jpg") || fileName.endsWith(".png")) || fileSize >= maxSize) {
+          document.querySelector(".add-img").insertAdjacentElement("afterend",errorMessage)
+          errorMessage.style.display = "block";
+          errorMessage.innerHTML = "Taille du fichier trop volumineuse ou format incorrect";
         } else {
           if (projectTitle.value == "") {
-            alert("Aucun titre")
-                  
-          } else {console.log(projectTitle.value , "hi")
+            document.getElementById("title").insertAdjacentElement("beforebegin",errorMessage)
+            errorMessage.style.display = "block";
+            errorMessage.innerHTML = "Aucun titre";                  
+          } else {
             addProject();
           }
-        } 
+        }
   }
 }
 
@@ -131,7 +141,6 @@ async function addProject() {
   formData.append("title", projectTitle.value);
   const projectCategory = document.querySelector("#categorie");
   formData.append("category", projectCategory.value);
-  console.log(projectCategory.value,projectTitle.value)
 
   const r = await fetch("http://localhost:5678/api/works", {
     method: "POST",

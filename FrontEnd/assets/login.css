@@ -164,8 +164,9 @@ input[type="submit"] {
     text-align: center;
 }
 
-.error {
-	background-color: rgba(255, 0, 0, 0.176);
+.error-msg {
+	display: none;
+	color: red;
 }
 
 footer nav ul {

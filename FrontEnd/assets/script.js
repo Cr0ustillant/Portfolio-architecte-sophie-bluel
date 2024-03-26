@@ -116,6 +116,8 @@ async function categories() {
   });
 }
 
+                  // A l'ouverture de la page
+
 window.onload = function() {
   buttonAll.classList.add("btn-style-selected");
   buttonAll.style.outline = "none";
@@ -124,6 +126,8 @@ window.onload = function() {
   categories();
   logged()
 }
+
+                  // Connecté/Déconnecté
 
 function logged() {
   const token = localStorage.getItem("token");
